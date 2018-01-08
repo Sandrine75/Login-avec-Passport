@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+var express = require('express');
+var router = express.Router();
 
 //// Get Homepage >> requette de la page ':' la homepage ////
 router.get('/', ensureAuthenticated, function(req, res){

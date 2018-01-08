@@ -1,22 +1,25 @@
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const exphbs = require('express-handlebars');
-const expressValidator = require('express-validator');
-const flash = require('connect-flash');
-const session = require('express-session');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const mongo = require('mongodb');
-const mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost/login1');      >> je passe sur Mlab au lieu de Mongodb Atlas
-// création d'un compte mlab spécifique. Le timeout permet d'aller plus vite dans la requette
-var options = { server: { socketOptions: {connectTimeoutMS: 30000 } }};
-mongoose.connect('mongodb://login:logout@ds239137.mlab.com:39137/loginlogout', options , function(err) {
-  console.log(err);
-});
-const db = mongoose.connection;
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser'); // Charge le middleware de gestion des paramètres
+var exphbs = require('express-handlebars');
+var expressValidator = require('express-validator');
+var flash = require('connect-flash');
+var session = require('express-session'); // Charge le middleware de sessions
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var mongo = require('mongodb');
+var mongoose = require('mongoose');
+
+// connection base de donnée 
+mongoose.Promise = global.Promise;
+mongoose.connection.openUri('mongodb://localhost/login1');    //  >> je passe sur Mlab au lieu de Mongodb Atlas
+        // création d'un compte mlab spécifique. Le timeout permet d'aller plus vite dans la requette
+        //var options = { server: { socketOptions: {connectTimeoutMS: 30000 } }};
+        //mongoose.connect('mongodb://login:logout@ds239137.mlab.com:39137/loginlogout', options , function(err) {
+        // console.log(err);
+        //});
+//var db = mongoose.connection;
 
 //// ajouter les routes : index et users ////
 var routes = require('./routes/index');
