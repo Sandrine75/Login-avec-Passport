@@ -13,6 +13,7 @@ var mongoose = require('mongoose');
 
 // connection base de donnée 
 mongoose.Promise = global.Promise;
+useMongoClient: true
 mongoose.connection.openUri('mongodb://localhost/login1');    //  >> je passe sur Mlab au lieu de Mongodb Atlas
         // création d'un compte mlab spécifique. Le timeout permet d'aller plus vite dans la requette
         //var options = { server: { socketOptions: {connectTimeoutMS: 30000 } }};
@@ -75,6 +76,7 @@ app.use(expressValidator({
 
 //// Middleware ConnectFlash //// pour envoyer des messages flash lors de la connection
 app.use(flash());
+
 // Global Vars >> les messages généraux renvoyés
 app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
